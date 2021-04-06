@@ -1,0 +1,198 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="shortcut icon" type="image/x-icon" href="https://static.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+<link rel="mask-icon" type="" href="https://static.codepen.io/assets/favicon/logo-pin-8f3771b1072e3c38bd662872f6b673a722f4b3ca2421637d5596661b4e2132cc.svg" color="#111" />
+<title>CodePen - Fork Me! FCC: Test Suite Template</title>
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css'>
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css'>
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css'>
+<style>
+    @media (min-width: 1200px) {
+  .container {
+    width: 750px !important;
+  }
+}
+@media (min-width: 992px) {
+  .container {
+    width: 750px !important;
+  }
+}
+@media (min-width: 768px) {
+  .container {
+    width: 750px !important;
+  }
+}
+.container {
+  box-shadow: 5px 5px 10px 5px rgba(0,0,0,0.6);
+  border: 7px;
+  border-style: outset;
+  border-color: rgba(0, 34, 81, 0.41);
+  border-radius: 15px;
+  background-color: cyan;
+  margin-top: 60px;
+  width: 450px !important;
+}
+.row {
+  height: 150px !important;
+}
+.col {
+  border-radius: 15px;
+  cursor: pointer;
+  border: 5px solid black;
+  text-align: center;
+  margin: 10px;
+  padding-top: 30px;
+  padding-bottom: auto;
+  font-size: 40px;
+}
+.boxShadow{
+  box-shadow: 5px 5px 5px 1px rgba(0,0,0,0.6);
+}
+.col:active{
+  box-shadow:none;
+}
+
+#display{
+  text-align:center;
+  font-size:30px;
+  background-color:white;
+  border:5px solid black;
+  border-radius:10px;
+  margin-bottom:8px;
+  margin-top:10px;
+}
+  </style>
+</head>
+<body translate="no">
+
+<head>
+<script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
+</head>
+<body>
+<div class="container" id="drum-machine">
+</div>
+</body>
+</html>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/react/16.9.0/umd/react.production.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.8.6/umd/react-dom.production.min.js'></script>
+<script id="rendered-js" type="module">
+      // import React from 'react'
+// import ReactDOM from 'react-dom'
+const link = [
+{ name: "Heater-1", id: "Q", color: "#FF00FF" },
+{ name: "Heater-2", id: "W", color: "#00FF00" },
+{ name: "Heater-3", id: "E", color: "#7B68EE" },
+{ name: "Heater-4_1", id: "A", color: "#F4A460" },
+{ name: "Heater-6", id: "S", color: "#FFFF99" },
+{ name: "Dsc_Oh", id: "D", color: "#FF6699" },
+{ name: "Kick_n_Hat", id: "Z", color: "#99FF99" },
+{ name: "RP4_KICK_1", id: "X", color: "#D2691E" },
+{ name: "Cev_H2", id: "C", color: "#00CCFF" }];
+
+var pre = "https://s3.amazonaws.com/freecodecamp/drums/";
+const row1 = link.slice(0, 3);
+const row2 = link.slice(3, 6);
+const row3 = link.slice(6, 9);
+
+function play(id, color, display) {
+  document.getElementById(id).play();
+  document.body.style.background = color;
+  document.getElementById("display").innerHTML = display;
+}
+class RowRender extends React.Component {
+  render() {
+    const x1 = row1.map((ele) =>
+    React.createElement("div", {
+      class: "drum-pad col boxShadow",
+      id: ele.name,
+      onClick: () => play(ele.id, ele.color, ele.name) },
+
+    React.createElement("audio", {
+      class: "clip",
+      id: ele.id,
+      src: pre + ele.name + ".mp3",
+      preload: "auto" }),
+
+    React.createElement("b", null, ele.id)));
+
+
+    const x2 = row2.map((ele) =>
+    React.createElement("div", {
+      class: "drum-pad col boxShadow",
+      id: ele.name,
+      onClick: () => play(ele.id, ele.color, ele.name) },
+
+    React.createElement("audio", {
+      class: "clip",
+      id: ele.id,
+      src: pre + ele.name + ".mp3",
+      preload: "auto" }),
+
+    React.createElement("b", null, ele.id)));
+
+
+    const x3 = row3.map((ele) =>
+    React.createElement("div", {
+      class: "drum-pad col boxShadow",
+      id: ele.name,
+      onClick: () => play(ele.id, ele.color, ele.name) },
+
+    React.createElement("audio", {
+      class: "clip",
+      id: ele.id,
+      src: pre + ele.name + ".mp3",
+      preload: "auto" }),
+
+    React.createElement("b", null, ele.id)));
+
+
+    return (
+      React.createElement("div", null,
+      React.createElement("div", { id: "display", class: "boxShadow" }, "Beat Type"),
+      React.createElement("div", { class: "row" }, x1),
+      React.createElement("div", { class: "row" }, x2),
+      React.createElement("div", { class: "row" }, x3)));
+
+
+  }}
+
+
+document.addEventListener("keydown", keyPress123);
+function keyPress123(event) {
+  if (event.key.toLowerCase() === "q") {
+    event.preventDefault();
+    play(link[0].id, link[0].color, link[0].name);
+  } else if (event.key.toLowerCase() === "w") {
+    event.preventDefault();
+    play(link[1].id, link[1].color, link[1].name);
+  } else if (event.key.toLowerCase() === "e") {
+    event.preventDefault();
+    play(link[2].id, link[2].color, link[2].name);
+  } else if (event.key.toLowerCase() === "a") {
+    event.preventDefault();
+    play(link[3].id, link[3].color, link[3].name);
+  } else if (event.key.toLowerCase() === "s") {
+    event.preventDefault();
+    play(link[4].id, link[4].color, link[4].name);
+  } else if (event.key.toLowerCase() === "d") {
+    event.preventDefault();
+    play(link[5].id, link[5].color, link[5].name);
+  } else if (event.key.toLowerCase() === "z") {
+    event.preventDefault();
+    play(link[6].id, link[6].color, link[6].name);
+  } else if (event.key.toLowerCase() === "x") {
+    event.preventDefault();
+    play(link[7].id, link[7].color, link[7].name);
+  } else if (event.key.toLowerCase() === "c") {
+    event.preventDefault();
+    play(link[8].id, link[8].color, link[8].name);
+  }
+}
+ReactDOM.render(React.createElement(RowRender, null), document.getElementById("drum-machine"));
+    </script>
+</body>
+</html>
